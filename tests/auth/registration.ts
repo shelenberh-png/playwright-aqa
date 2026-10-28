@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 export { test, expect };
 
-export const registrationUrl = 'https://guest:welcome2qauto@qauto.forstudy.space/';
+export const registrationUrl = '/';
 
 export async function openRegistration(page: import('@playwright/test').Page) {
   await page.goto(registrationUrl);

@@ -18,7 +18,7 @@ export class RegistrationPage {
   }
 
   async open() {
-    await this.page.goto('https://guest:welcome2qauto@qauto.forstudy.space/');
+    await this.page.goto('/');
     await this.page.getByRole('button', { name: 'Sign up' }).click();
     await expect(this.page.getByRole('heading', { name: 'Registration' })).toBeVisible();
   }
