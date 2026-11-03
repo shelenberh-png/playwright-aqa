@@ -18,6 +18,7 @@ if (fs.existsSync(envFile)) {
 }
 
 const baseURL = process.env.BASE_URL;
+const authFile = path.resolve(__dirname, '.playwright/auth/user.json');
 const httpCredentials = process.env.HTTP_USERNAME && process.env.HTTP_PASSWORD
   ? { username: process.env.HTTP_USERNAME, password: process.env.HTTP_PASSWORD }
   : undefined;
@@ -50,18 +51,29 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'setup',
+      testMatch: /auth\.setup\.ts/,
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'chromium',
+      dependencies: ['setup'],
+      testIgnore: /auth\.setup\.ts/,
+      use: { ...devices['Desktop Chrome'], storageState: authFile },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      dependencies: ['setup'],
+      testIgnore: /auth\.setup\.ts/,
+      use: { ...devices['Desktop Firefox'], storageState: authFile },
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      dependencies: ['setup'],
+      testIgnore: /auth\.setup\.ts/,
+      use: { ...devices['Desktop Safari'], storageState: authFile },
     },
 
     /* Test against mobile viewports. */

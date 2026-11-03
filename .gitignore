@@ -9,5 +9,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+# Authentication state contains session credentials.
+/.playwright/auth/
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
